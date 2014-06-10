@@ -33,6 +33,7 @@ Ohai.plugin(:Orionvm) do
   # name<Symbol>:: Use :public_ip or :private_ip
   # eth<Symbol>:: Interface name of public or private ip
   def get_ip_address(name, eth)
+    return nil unless network[:interfaces][eth]
     network[:interfaces][eth][:addresses].each do |key, info|
       if info['family'] == 'inet'
         orionvm[name] = key
